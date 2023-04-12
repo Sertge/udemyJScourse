@@ -1,3 +1,3 @@
 
-alert('This code is silly, I\'ll just change the font');
+alert('This is a welcoming alert. Welcome!');
 let randVar=document.getElementById('button')
