@@ -1,6 +1,6 @@
 <html>
   <head>
-    <title>Friend list</title>
+    <title>Friend List</title>
     <style>
       td {
         border: 1px solid #ddd;
@@ -14,7 +14,9 @@
   </head>
 
   <body>
-    <div id="message">Friend list excercise, add/delete elements from the friend list</div>
+    <div id="message">
+      Friend list excercise, add/delete elements from the friend list
+    </div>
     <div>
       <input type="text" id="addFriend" />
       <input type="button" id="addNew" value="Add Friend" />
@@ -33,6 +35,13 @@
         "Jane",
       ];
       window.onload = build;
+      document.getElementById("addNew").addEventListener("click", addN, false);
+
+      function addN() {
+        var a = document.getElementById("addFriend").value;
+        myArray.push(a);
+        build();
+      }
 
       function build() {
         var html = "<h1>Click Table</h1><table>";
@@ -55,6 +64,28 @@
             var r = myArray.splice(iValue, 1);
             build();
             console.log(r);
+          });
+        }
+        var dae = document.querySelectorAll('[data-action="edit"]');
+        for (var x = 0; x < dae.length; x++) {
+          dae[x].addEventListener("click", function () {
+            event.preventDefault();
+            var row = this.closest("[data-row]");
+            var rid = row.getAttribute("data-row");
+            row.style.backgroundColor = "Yellow";
+            var td = row.firstElementChild;
+            var input = document.createElement("input");
+            input.type = "text";
+            input.value = td.innerText;
+            td.innerHTML = "";
+            td.appendChild(input);
+            input.focus();
+            input.onblur = function () {
+              td.removeChild(input);
+              td.innerHTML = input.value;
+              myArray[rid] = input.value;
+              row.style.backgroundColor = "White";
+            };
           });
         }
         console.log(dad);
